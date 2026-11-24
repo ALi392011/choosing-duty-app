@@ -1,0 +1,11 @@
+FROM python:3.14
+
+COPY --from=ghcr.io/astral-sh/uv:0.13.7 /uv /uvx /bin/
+
+COPY . . /backend
+
+WORKDIR /backend
+
+RUN uv sync --locked
+
+CMD ["uv", "run", "fastapi", "run", "app/backend/main.py", "--host", "0.0.0.0", "--port", "80"]
