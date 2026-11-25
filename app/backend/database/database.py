@@ -18,9 +18,10 @@ from sqlalchemy import text
 
 load_dotenv()
 postgres_password = os.getenv('POSTGRES_PASSWORD')
+postgres_user = os.getenv('POSTGRES_USER')
 
 engine = create_async_engine(
-    f"postgresql+asyncpg://postgres:{postgres_password}@db:5432/students_db",
+    f"postgresql+asyncpg://{postgres_user}:{postgres_password}@db:5432/students_db",
     echo=True)
 async_session = async_sessionmaker(engine, expire_on_commit=False)
 
